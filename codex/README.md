@@ -8,6 +8,10 @@ Codex Session Guard is a size-audit utility that is read-only with respect to lo
 - inspect individual session files with `--view files`;
 - classify sizes as SAFE, WATCH, WARNING, or CRITICAL using configurable thresholds.
 
+## Demo
+
+![Codex Session Guard terminal dashboard showing session size totals and risk levels](codex-guard.webp)
+
 The tool does not read conversation bodies and does not modify Codex session data. It loads complete task metadata from `state_5.sqlite` only when an exclusive, non-mutating read is available. If another process holds the database, the tool does not wait; it immediately falls back to file attributes such as names, sizes, and modification times. In fallback mode, titles and workspaces are unavailable, parent/sub-agent relationships cannot be reconstructed, and task aggregation is limited to identifiers derived from filenames. Session candidates are deduplicated by canonical physical-file identity, so path aliases, symbolic links, and hard links to the same file count only once toward both file count and total size. By default it appends the report to a log, so it is not accurate to claim that the program never writes files.
 
 ## Requirements
